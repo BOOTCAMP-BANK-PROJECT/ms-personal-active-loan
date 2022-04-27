@@ -10,6 +10,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.core.env.Environment;
+import org.springframework.data.mongodb.core.ReactiveMongoTemplate;
 
 import java.util.logging.Logger;
 
@@ -17,20 +18,25 @@ import java.util.logging.Logger;
 		title = "OpenAPI Documentation",
 		version = "1.0.0",
 		description = "OpenAPI Loan Application Documentation v1.0.0",
-		contact = @Contact(name = "Samuel Luis", email = "samuel@company.com", url = "https://www.linkedin.com/in/samuel14luis/"),
+		contact = @Contact(name = "Roberto Jaison", email = "jaisonjv7@gmail.com", url = ""),
 		license = @License(name = "MIT License", url = "https://choosealicense.com/licenses/mit/")
 ))
 @EnableEurekaClient
 @SpringBootApplication
-public class LoanApplication implements CommandLineRunner {
+public class PersonalActiveLoanApplication implements CommandLineRunner {
 
-	private static final Logger logger = Logger.getLogger(LoanApplication.class.toString());
+	private static final Logger logger = Logger.getLogger(PersonalActiveLoanApplication.class.toString());
+	
+	@Autowired
+	private ReactiveMongoTemplate mongoTemplate;
 
 	@Autowired
 	private Environment env;
 
 	@Override
 	public void run(String... args) throws Exception {
+		
+		mongoTemplate.dropCollection("personalactiveloan").subscribe();
 
 		//logger.log(Level.INFO, env.getProperty("spring.application.name"));
 		logger.info("Java version: " + env.getProperty("java.version"));
@@ -40,7 +46,7 @@ public class LoanApplication implements CommandLineRunner {
 	}
 
 	public static void main(String[] args) {
-		SpringApplication.run(LoanApplication.class, args);
+		SpringApplication.run(PersonalActiveLoanApplication.class, args);
 	}
 
 }
