@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 @Data
@@ -21,14 +22,15 @@ public class PersonalLoan {
     private String loanNumber;
     private String idClient;
     private String idPersonalLoanType;
-    private Double creditAmount;
+    private BigDecimal creditAmount;
     private Date disbursementDay;
     private Date paymentDay;
     private Integer loanPeriod;
     private Integer loangracePeriod;
-    private Double loanInterestRate;
-    private Double creditoMoratoriumInterestRate;
+    private BigDecimal loanMonthInterestRate;
+    private BigDecimal creditMoratoriumInterestRate;
     private String isoCurrencyCode;
+    private BigDecimal loanInstallment;
     private short registrationStatus;
     private Date insertionDate;
     private String fk_insertionUser;

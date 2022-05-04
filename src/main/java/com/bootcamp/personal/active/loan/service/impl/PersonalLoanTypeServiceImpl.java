@@ -80,4 +80,6 @@ public class PersonalLoanTypeServiceImpl implements PersonalLoanTypeService {
                         "update.onErrorResume"
                 )));
     }
+
+
 }

@@ -23,7 +23,7 @@ import java.util.logging.Logger;
 ))
 @EnableEurekaClient
 @SpringBootApplication
-public class PersonalActiveLoanApplication implements CommandLineRunner {
+public class  PersonalActiveLoanApplication implements CommandLineRunner {
 
 	private static final Logger logger = Logger.getLogger(PersonalActiveLoanApplication.class.toString());
 	

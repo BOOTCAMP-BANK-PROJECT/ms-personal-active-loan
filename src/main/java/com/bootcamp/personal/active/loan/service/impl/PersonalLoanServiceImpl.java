@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 @Service
@@ -44,6 +45,7 @@ public class PersonalLoanServiceImpl implements PersonalLoanService {
                 .switchIfEmpty(Mono.defer(() -> {
                             personalLoan.setId(null);
                             personalLoan.setInsertionDate(new Date());
+                            personalLoan.setRegistrationStatus((short) 1);
                             return repository.save(personalLoan);
                         }
                 ))
@@ -80,5 +82,11 @@ public class PersonalLoanServiceImpl implements PersonalLoanService {
                         PersonalLoanServiceImpl.class,
                         "update.onErrorResume"
                 )));
+    }
+
+    @Override
+    public Mono<BigDecimal> CalculateInstallment(PersonalLoan personalLoan) {
+        BigDecimal totallyAmount = personalLoan.getCreditAmount().multiply(new BigDecimal(1).add(personalLoan.getLoanMonthInterestRate())).multiply(new BigDecimal(personalLoan.getLoanPeriod()+personalLoan.getLoangracePeriod()));
+        return Mono.just(totallyAmount.divide(new BigDecimal(personalLoan.getLoanPeriod())));
     }
 }
