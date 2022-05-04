@@ -19,6 +19,6 @@ public interface PersonalLoanService {
 
     public Mono<PersonalLoan> delete(String id);
 
-    public Mono<BigDecimal> CalculateInstallment(PersonalLoan personalLoan);
+    public Mono<BigDecimal> calculateInstallment(PersonalLoan personalLoan);
 
 }

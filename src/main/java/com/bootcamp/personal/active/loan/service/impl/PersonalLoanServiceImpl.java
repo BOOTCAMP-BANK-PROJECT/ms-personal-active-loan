@@ -85,7 +85,7 @@ public class PersonalLoanServiceImpl implements PersonalLoanService {
     }
 
     @Override
-    public Mono<BigDecimal> CalculateInstallment(PersonalLoan personalLoan) {
+    public Mono<BigDecimal> calculateInstallment(PersonalLoan personalLoan) {
         BigDecimal totallyAmount = personalLoan.getCreditAmount().multiply(new BigDecimal(1).add(personalLoan.getLoanMonthInterestRate())).multiply(new BigDecimal(personalLoan.getLoanPeriod()+personalLoan.getLoangracePeriod()));
         return Mono.just(totallyAmount.divide(new BigDecimal(personalLoan.getLoanPeriod())));
     }
